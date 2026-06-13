@@ -895,3 +895,43 @@ table.cat td:first-child { font-weight: 700; color: var(--navy); white-space: no
     .curated { display: block; margin-left: 0; margin-top: 4px; }
     .slidein-cta { right: 16px; bottom: 16px; left: 16px; width: auto; max-width: none; }
 }
+
+/* ============================================================
+   Reference-inspired styling uplift (C) — CSS ONLY, no content added
+   参考: smartconsul / evelink / shukatsu / unposs / shukyaku
+   既存の承認済みコンテンツの装飾のみ。navy/blue系・red/gold不使用。
+   ============================================================ */
+:root {
+    --azure: #1f8fd6;
+    --azure-deep: #0a6cb0;
+    --grad: linear-gradient(135deg, #003366 0%, #1f8fd6 100%);
+}
+
+/* ---- Hero: 深い青グラデ＋キーワードのトーン分け（unposs） ---- */
+.hero-scrim { background: linear-gradient(120deg, rgba(7, 32, 60, 0.92) 0%, rgba(0, 51, 102, 0.66) 46%, rgba(31, 143, 214, 0.4) 100%); }
+.hero-title .accent { color: #9ed2f5; }
+
+/* ---- 見出し：英字ラベルをazure・左バーをグラデ（smartconsul） ---- */
+.sec-eyebrow { color: var(--azure); }
+.sec-title::before { background-image: var(--grad); }
+
+/* ---- タイル：上アクセントazure・影・ホバーリフト（全参考） ---- */
+.tile { border-top-color: var(--azure); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.tile:hover { transform: translateY(-6px); box-shadow: 0 22px 46px rgba(0, 51, 102, 0.14); }
+
+/* ---- 政府ハブ：グラデーション（shukyaku的権威） ---- */
+.gov-box.hub { background-image: var(--grad); border-color: transparent; }
+.gov-box.hub h4, .gov-box.hub p { color: #ffffff; }
+
+/* ---- ボタン：pill＋グラデ送信ボタン（shukatsu / unposs） ---- */
+.btn { border-radius: 999px; }
+.btn-submit { background-image: var(--grad); background-color: var(--navy); border-color: transparent; box-shadow: 0 10px 24px rgba(10, 108, 176, 0.26); }
+.btn-submit:hover { filter: brightness(1.07); }
+
+/* ---- 画像：ホバーズーム（smartconsul） ---- */
+.media-figure img { transition: transform 0.6s ease; }
+.media-figure:not(.contain):hover img { transform: scale(1.03); }
+
+/* ---- リビールをやや豊かに ---- */
+.js .reveal:not(.is-visible) { opacity: 0; transform: translateY(28px); }
+.reveal { transition: opacity 0.9s ease, transform 0.9s ease; }

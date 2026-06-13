@@ -1244,3 +1244,34 @@ section { scroll-margin-top: var(--header-h); }
     border: 3px solid #ffffff;
     box-shadow: 0 0 0 2px var(--azure), 0 12px 26px rgba(0, 51, 102, 0.14);
 }
+
+/* ============================================================
+   BOLD scale & composition (A) — CSS only, no content change.
+   Poster hero / oversized "ghost" section labels with overlapping
+   title / huge numbers. (per "look at sizes & positioning")
+   ============================================================ */
+/* Hero = poster: 巨大タイトルを下寄せ、ラベルは小さく */
+.hero { align-items: flex-end; }
+.hero-inner { padding-top: calc(var(--header-h) + 48px); padding-bottom: clamp(52px, 9vh, 120px); }
+.hero-eyebrow { font-size: 13px; margin-bottom: 22px; }
+.hero-title { font-size: clamp(36px, 6.6vw, 80px); line-height: 1.16; letter-spacing: 0; margin-bottom: 26px; }
+.hero-lead { max-width: 620px; }
+
+/* Section header = 巨大なゴースト英字ラベル＋重なる和文タイトル（雑誌的） */
+.section-head { position: relative; overflow: hidden; padding-top: clamp(8px, 3vw, 28px); }
+.section-head.center { overflow: visible; }
+.section-eyebrow {
+    display: block; margin: 0; padding: 0;
+    font-family: var(--font-en); font-weight: 800; text-transform: uppercase;
+    font-size: clamp(46px, 8.4vw, 110px); line-height: 0.82; letter-spacing: -0.03em;
+    color: rgba(0, 51, 102, 0.06); white-space: nowrap;
+}
+.section-eyebrow::after { display: none; }
+.section-dark .section-eyebrow { color: rgba(255, 255, 255, 0.08); }
+.section-title { position: relative; z-index: 1; margin-top: -0.4em; font-size: clamp(27px, 3.6vw, 46px); line-height: 1.32; }
+.section-lead { position: relative; z-index: 1; }
+
+/* Stats = 巨大数字 */
+.stats-row { padding: 52px 40px; }
+.stats-row .stat-number { font-size: clamp(52px, 8.5vw, 104px); line-height: 0.95; letter-spacing: -0.02em; }
+.stats-row .stat-unit { font-size: 18px; }

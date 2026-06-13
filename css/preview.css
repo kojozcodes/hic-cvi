@@ -608,7 +608,7 @@ section { scroll-margin-top: var(--header-h); }
 .section-dark .sec-ja { color: #ffffff; }
 .section-dark .sec-lead { color: rgba(255, 255, 255, 0.6); }
 
-.gov-diagram { max-width: 920px; margin: 0 auto; }
+.gov-diagram { max-width: 1000px; margin: 0 auto; }
 .gov-diagram svg { width: 100%; height: auto; display: block; }
 .gov-lines line {
     stroke: rgba(255, 255, 255, 0.28);

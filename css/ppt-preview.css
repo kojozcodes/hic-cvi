@@ -935,3 +935,18 @@ table.cat td:first-child { font-weight: 700; color: var(--navy); white-space: no
 /* ---- リビールをやや豊かに ---- */
 .js .reveal:not(.is-visible) { opacity: 0; transform: translateY(28px); }
 .reveal { transition: opacity 0.9s ease, transform 0.9s ease; }
+
+/* ============================================================
+   Reference moves r2 (C) — Smart Consul split-hero scrim
+   ＋ メンバーカードのazure上アクセント（evelink的）。CSS only.
+   ============================================================ */
+.hero-scrim {
+    background: linear-gradient(100deg,
+        rgba(7, 20, 38, 0.95) 0%,
+        rgba(7, 20, 38, 0.9) 38%,
+        rgba(0, 51, 102, 0.5) 56%,
+        rgba(0, 51, 102, 0.12) 74%,
+        rgba(0, 51, 102, 0) 100%);
+}
+.mcard { border-top: 3px solid var(--azure); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.mcard:hover { transform: translateY(-6px); box-shadow: 0 22px 46px rgba(0, 51, 102, 0.14); }

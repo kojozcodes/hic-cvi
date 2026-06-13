@@ -1130,3 +1130,67 @@ section { scroll-margin-top: var(--header-h); }
 
     .slidein-cta { right: 16px; bottom: 16px; left: 16px; width: auto; max-width: none; }
 }
+
+/* ============================================================
+   CTA band（写真＋ネイビー帯）— 参考日系サイトのリピートCTA。
+   配色はnavy/blueのみ（red/gold不使用）。写真はカラー。
+   ============================================================ */
+.cta-band {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--navy-night);
+}
+.cta-band-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(7, 22, 38, 0.92) 0%, rgba(0, 51, 102, 0.82) 55%, rgba(0, 86, 179, 0.5) 100%);
+}
+.cta-band-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 760px;
+    padding-top: 104px;
+    padding-bottom: 104px;
+}
+.cta-band-eyebrow {
+    margin: 0 0 16px;
+    font-family: var(--font-en);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #9ec4ec;
+}
+.cta-band-title {
+    margin: 0 0 18px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+}
+.cta-band-text {
+    margin: 0 auto 34px;
+    max-width: 600px;
+    font-size: 15px;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.82);
+}
+.band-btn {
+    display: inline-block;
+    padding: 15px 38px;
+    background-color: #ffffff;
+    color: var(--navy);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    font-size: 14.5px;
+    border: 1px solid #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.band-btn:hover { background-color: transparent; color: #ffffff; }
+@media (max-width: 640px) {
+    .cta-band-title { font-size: 22px; }
+    .cta-band-inner { padding-top: 72px; padding-bottom: 72px; }
+}

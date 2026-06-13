@@ -895,3 +895,69 @@ table.cat td:first-child { font-weight: 700; color: var(--navy); white-space: no
     .curated { display: block; margin-left: 0; margin-top: 4px; }
     .slidein-cta { right: 16px; bottom: 16px; left: 16px; width: auto; max-width: none; }
 }
+
+/* ============================================================
+   CTA band（全幅写真＋ネイビー帯）— 参考日系サイトのリピートCTA。
+   配色はnavy/blueのみ。写真はカラー。明るい写真でも白文字が読める
+   よう、ほぼ均一の濃いネイビーオーバーレイを使用。
+   ============================================================ */
+.cta-band {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--navy-bg);
+}
+.cta-band-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(rgba(0, 40, 79, 0.88), rgba(0, 42, 84, 0.84));
+}
+.cta-band-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 760px;
+    padding-top: 108px;
+    padding-bottom: 108px;
+}
+.cta-band-eyebrow {
+    margin: 0 0 16px;
+    font-family: var(--font-en);
+    font-size: 14px;
+    letter-spacing: 0.2em;
+    color: var(--blue-light);
+}
+.cta-band-title {
+    margin: 0 0 18px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+}
+.cta-band-text {
+    margin: 0 auto 34px;
+    max-width: 600px;
+    font-size: 15px;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.82);
+}
+.band-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 36px;
+    background-color: #ffffff;
+    color: var(--navy);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-size: 14.5px;
+    border: 1px solid #ffffff;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.band-btn:hover { background-color: transparent; color: #ffffff; }
+.band-arrow { font-family: var(--font-en); }
+@media (max-width: 640px) {
+    .cta-band-title { font-size: 22px; }
+    .cta-band-inner { padding-top: 72px; padding-bottom: 72px; }
+}

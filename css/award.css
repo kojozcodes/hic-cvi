@@ -1,0 +1,71 @@
+/* ============================================================
+   award.css — shared Awwwards-grade motion & polish layer (A/B/C)
+   ------------------------------------------------------------
+   各ページ固有CSSの後に読み込む。モーションは Lenis（スムース
+   スクロール）+ GSAP/ScrollTrigger（js/award.js）が制御する。
+   配色は各ページのトークンに従う（navy/blue・red/gold不使用）。
+   FOUC防止ゲート（html.anim）＋ reduced-motion / JS失敗フォール
+   バック付きで、モーション無効でも必ずコンテンツが見える。
+   ============================================================ */
+
+/* ---- Lenis（公式推奨） ---- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
+
+/* ---- reveal は GSAP が制御（CSS transitionと競合させない） ---- */
+.reveal { transition: none !important; }
+
+/* ---- FOUC ゲート：html.anim の時だけ隠す（GSAPが可視化） ---- */
+html.anim .reveal { opacity: 0; will-change: opacity, transform; }
+html.anim .hero-eyebrow,
+html.anim .hero-org,
+html.anim .hero-title,
+html.anim .hero-lead,
+html.anim .hero-actions { opacity: 0; will-change: opacity, transform; }
+/* ヒーロー画像（B/C は .hero-media）。Aは背景がsection直付けのためJSで処理 */
+html.anim .hero-media { transform: scale(1.08); will-change: transform; }
+/* SVGダイアグラム（Bのみ）：描画前に隠す */
+html.anim .gov-lines line,
+html.anim .rel-arrows line,
+html.anim .gov-node, html.anim .gov-hub,
+html.anim .rel-node, html.anim .rel-labels text, html.anim .rel-caption { opacity: 0; }
+
+/* ---- 等幅数字（カウントアップで幅が暴れない） ---- */
+.stat-number { font-variant-numeric: tabular-nums; }
+
+/* ---- reduced-motion：すべて即時表示 ---- */
+@media (prefers-reduced-motion: reduce) {
+    html.anim .reveal,
+    html.anim .hero-eyebrow, html.anim .hero-org, html.anim .hero-title,
+    html.anim .hero-lead, html.anim .hero-actions { opacity: 1 !important; transform: none !important; }
+    html.anim .hero-media { transform: none !important; }
+    html.anim .gov-lines line, html.anim .rel-arrows line,
+    html.anim .gov-node, html.anim .gov-hub,
+    html.anim .rel-node, html.anim .rel-labels text, html.anim .rel-caption { opacity: 1 !important; }
+    .scroll-progress { display: none; }
+    .hero::after { animation: none !important; }
+}
+
+/* ---- スクロール進捗バー ---- */
+.scroll-progress {
+    position: fixed; top: 0; left: 0;
+    height: 2px; width: 100%;
+    transform: scaleX(0); transform-origin: left center;
+    background: linear-gradient(90deg, #003366, #1f8fd6);
+    z-index: 200; pointer-events: none;
+}
+
+/* ---- ヘッダー：スクロール時に磨りガラス（各ページの is-scrolled に追加） ---- */
+.site-header.is-scrolled {
+    -webkit-backdrop-filter: saturate(150%) blur(12px);
+    backdrop-filter: saturate(150%) blur(12px);
+}
+
+/* ---- マグネティックボタンのGPUヒント ---- */
+.btn { will-change: transform; }
+
+/* ---- ゴースト英字ラベルのパララックス用ヒント ---- */
+.section-eyebrow, .sec-eyebrow { will-change: transform; }

@@ -447,7 +447,6 @@ section { scroll-margin-top: var(--header-h); }
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    border: 1px solid var(--line);
     background-color: #ffffff;
 }
 .profile-photo img {

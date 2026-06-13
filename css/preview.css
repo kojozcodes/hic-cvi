@@ -508,7 +508,6 @@ section { scroll-margin-top: var(--header-h); }
     width: 100%;
     max-width: 300px;
     height: auto;
-    border: 1px solid var(--line);
 }
 .portrait-figure figcaption {
     margin-top: 18px;

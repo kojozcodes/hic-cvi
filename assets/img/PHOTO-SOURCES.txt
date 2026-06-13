@@ -1,10 +1,6 @@
 HIC/CVI Japan Desk — stock photography sources
-All images sourced from Pexels (https://www.pexels.com).
+Source: Pexels (https://www.pexels.com)
 License: Pexels License — free for commercial use, no attribution required.
 https://www.pexels.com/license/
 
-photo-advisory.jpg     Pexels #6950031  (business professionals in meeting)
-photo-review.jpg       Pexels #8112158  (professionals reviewing documents)
-photo-tower.jpg        Pexels #9389053  (modern glass skyscraper, blue sky)
-photo-tower-alt.jpg    Pexels #8954109  (glass skyscraper, overcast / blue-grey)
-photo-boardroom.jpg    Pexels #5869295  (elegant empty conference room)
+photo-advisory.jpg   Pexels #6950031  (business professionals in a meeting)

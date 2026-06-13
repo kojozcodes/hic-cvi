@@ -24,7 +24,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+JP:wght@400;500;600;700&family=Shippori+Mincho:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Noto+Sans+JP:wght@400;500;600&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/preview.css">
 </head>
 <body id="top">
@@ -61,14 +61,14 @@
             <div class="hero-inner container">
                 <p class="hero-org reveal">北京中誠君和国際諮詢有限公司（HIC）　中誠君和（北京）国際資産評価有限公司（CVI）</p>
                 <h1 class="hero-title reveal" data-reveal-delay="1">
-                    中国における資産評価・移転・撤退を、<br>日本語で一気通貫サポート
+                    中国における資産評価・移転・撤退を、<br class="pc-only">日本語で一気通貫サポート
                 </h1>
                 <p class="hero-lead reveal" data-reveal-delay="2">
                     違法リスクを回避し、中国資産の評価・撤退を成功に導く。<br class="pc-only">
                     HIC/CVI Japan Deskは、評価・税務・撤退・当局対応に精通した実務家集団です。
                 </p>
                 <div class="hero-actions reveal" data-reveal-delay="3">
-                    <a href="#contact" class="btn btn-hero">お問い合わせ<span class="btn-arrow">&#8594;</span></a>
+                    <a href="#contact" class="btn btn-hero">お問い合わせ<span class="btn-arrow" aria-hidden="true">&#8594;</span></a>
                     <a href="#contact" class="textlink textlink-light">資料ダウンロード</a>
                 </div>
             </div>
@@ -166,37 +166,27 @@
                         <div class="region-row">
                             <p class="region-name">華北エリア</p>
                             <p class="region-cities">北京(3)、天津(2)、瀋陽、大連、青島、石家庄、済南</p>
-                            <p class="region-count">9</p>
                         </div>
                         <div class="region-row">
                             <p class="region-name">華東エリア</p>
                             <p class="region-cities">上海(2)、南京(2)、蘇州、無錫、杭州、寧波</p>
-                            <p class="region-count">8</p>
                         </div>
                         <div class="region-row">
                             <p class="region-name">華南エリア</p>
                             <p class="region-cities">福州、厦門、深セン、広州</p>
-                            <p class="region-count">4</p>
                         </div>
                         <div class="region-row">
                             <p class="region-name">華中エリア</p>
                             <p class="region-cities">武漢、成都、重慶、合肥</p>
-                            <p class="region-count">4</p>
                         </div>
                         <div class="region-row">
                             <p class="region-name">西北エリア</p>
                             <p class="region-cities">ウルムチ、洛陽、太原</p>
-                            <p class="region-count">3</p>
-                        </div>
-                        <div class="region-row region-total">
-                            <p class="region-name">合計</p>
-                            <p class="region-cities">中国大陸 主要都市</p>
-                            <p class="region-count">30<span class="region-unit">拠点</span></p>
                         </div>
                     </div>
                     <figure class="map-figure reveal" data-reveal-delay="1">
                         <img src="assets/img/china-network-map.png" alt="HIC/CVI 中国大陸拠点マップ（全30拠点）" width="1025" height="716" loading="lazy">
-                        <figcaption>HIC/CIV 拠点マップ（中国大陸）</figcaption>
+                        <figcaption>HIC/CVI 拠点マップ（中国大陸）</figcaption>
                     </figure>
                 </div>
             </div>
@@ -268,11 +258,11 @@
                 <div class="gov-diagram reveal" role="img" aria-label="HIC/CVIを中心に、財政部・国家税務局・自然資源部／建設部・国有資産管理委員会・中国資産評価士協会の5機関と連携している関係図">
                     <svg viewBox="0 0 920 470" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <g class="gov-lines">
-                            <line x1="460" y1="235" x2="460" y2="78"/>
-                            <line x1="460" y1="235" x2="150" y2="150"/>
-                            <line x1="460" y1="235" x2="770" y2="150"/>
-                            <line x1="460" y1="235" x2="205" y2="372"/>
-                            <line x1="460" y1="235" x2="715" y2="372"/>
+                            <line x1="460" y1="235" x2="460" y2="92"/>
+                            <line x1="460" y1="235" x2="172" y2="160"/>
+                            <line x1="460" y1="235" x2="748" y2="160"/>
+                            <line x1="460" y1="235" x2="212" y2="368"/>
+                            <line x1="460" y1="235" x2="708" y2="368"/>
                         </g>
                         <g class="gov-node">
                             <text x="460" y="56" text-anchor="middle" class="g-name">財政部</text>
@@ -430,21 +420,28 @@
                                 </g>
                                 <!-- arrows -->
                                 <g class="rel-arrows">
-                                    <!-- 事業企業 -> 監査法人：監査 -->
-                                    <line x1="305" y1="96" x2="180" y2="300" marker-end="url(#arrw)"/>
+                                    <!-- 監査法人 -> 事業企業：財務諸表の監査 -->
+                                    <line x1="180" y1="300" x2="305" y2="96" marker-end="url(#arrw)"/>
                                     <!-- 事業企業 -> 評価機関：評価の依頼 -->
                                     <line x1="455" y1="96" x2="585" y2="300" marker-end="url(#arrw)"/>
-                                    <!-- 評価機関 -> 監査法人：評価報告書 -->
+                                    <!-- 評価機関 -> 監査法人：評価報告書の提出 -->
                                     <line x1="512" y1="334" x2="248" y2="334" marker-end="url(#arrw)"/>
                                 </g>
                                 <g class="rel-labels">
                                     <text x="195" y="190" text-anchor="middle">財務諸表の監査</text>
                                     <text x="572" y="190" text-anchor="middle">評価の依頼</text>
-                                    <text x="380" y="320" text-anchor="middle">評価報告書（中立的な公正価値の根拠）</text>
+                                    <text x="380" y="320" text-anchor="middle">評価報告書の提出（監査対応）</text>
                                 </g>
                                 <text x="380" y="415" text-anchor="middle" class="rel-caption">評価結論の合理性に責任を負う体制</text>
                             </svg>
                         </div>
+                        <!-- モバイル用：図の代替リスト -->
+                        <ul class="relation-list reveal" data-reveal-delay="1">
+                            <li><span class="rl-flow">監査法人 → 事業企業</span><span class="rl-desc">財務諸表の監査</span></li>
+                            <li><span class="rl-flow">事業企業 → 評価機関（HIC/CVI）</span><span class="rl-desc">評価の依頼</span></li>
+                            <li><span class="rl-flow">評価機関 → 監査法人</span><span class="rl-desc">評価報告書の提出（監査対応）</span></li>
+                            <li class="rl-caption">評価結論の合理性に責任を負う体制</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -484,13 +481,13 @@
                     <p class="sec-en">Compliance</p>
                     <h2 class="sec-ja">資産評価カテゴリーとコンプライアンス</h2>
                 </header>
-                <div class="table-scroll reveal">
+                <div class="table-scroll reveal" tabindex="0" role="region" aria-label="資産評価カテゴリー一覧">
                     <table class="category-table">
                         <thead>
                             <tr>
-                                <th>カテゴリー</th>
-                                <th>法的定義 / 範囲</th>
-                                <th>代表例</th>
+                                <th scope="col">カテゴリー</th>
+                                <th scope="col">法的定義 / 範囲</th>
+                                <th scope="col">代表例</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -612,7 +609,7 @@
                                 <textarea id="inquiry" name="inquiry" rows="6" required></textarea>
                             </div>
                             <div class="form-submit">
-                                <button type="submit" class="btn btn-submit">送信する<span class="btn-arrow">&#8594;</span></button>
+                                <button type="submit" class="btn btn-submit">送信する<span class="btn-arrow" aria-hidden="true">&#8594;</span></button>
                             </div>
                             <p class="form-message" id="formMessage" role="status" aria-live="polite" hidden>
                                 この度は、HIC/CVI Japan Deskへお問い合わせいただき、誠にありがとうございます。内容を確認の上、担当者よりご連絡いたします。

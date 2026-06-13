@@ -10,6 +10,8 @@
    - 見出しは控えめサイズ×明朝、トラッキングは極小英字ラベルのみ広く
    - セクション見出しは全て左揃え。英字セリフ大＋日本語小（NO&T式）
    - 写真はカラー・矩形。CSSフィルタによる加工はしない
+     （例外: 拠点マップのみ彩度を軽減。専用デザインのマップ画像への
+       差し替えを推奨 → 差し替え後はフィルタを削除すること）
    - アイコン全廃。数字・キーワード・罫線で構成
    ============================================================ */
 
@@ -22,12 +24,13 @@
     --line: rgba(22, 36, 58, 0.16);
     --line-strong: rgba(22, 36, 58, 0.55);
     --accent: #1d4e8f;            /* リンク・英字ラベルのみ */
+    --accent-on-dark: #3e7cc0;    /* accentの明度補正（ダーク面の細線用。仕様: 細いブルーライン） */
     --paper: #ffffff;
     --wash: #f5f7fa;              /* 冷たい淡色帯 */
     --beige: #efece5;             /* 温かい淡色帯（印刷物の質感） */
 
     --font-jp: 'Noto Sans JP', 'Yu Gothic', 'Hiragino Sans', sans-serif;
-    --font-min: 'Shippori Mincho', 'Yu Mincho', serif;
+    --font-min: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
     --font-en: 'Marcellus', 'Times New Roman', serif;
 
     --container: 1200px;
@@ -75,6 +78,7 @@ section { scroll-margin-top: var(--header-h); }
     html { scroll-behavior: auto; }
     .js .reveal:not(.is-visible) { opacity: 1; transform: none; }
     .reveal { transition: none; }
+    .slidein-cta { transition: opacity 0.01s, visibility 0.01s; transform: none; }
 }
 
 /* ============ Buttons / links ============ */
@@ -247,9 +251,10 @@ section { scroll-margin-top: var(--header-h); }
 .hero-scrim {
     position: absolute;
     inset: 0;
+    /* --ink-bg #0c1726 と同一チャンネルから派生 */
     background:
-        linear-gradient(96deg, rgba(9, 17, 30, 0.9) 0%, rgba(9, 17, 30, 0.62) 48%, rgba(9, 17, 30, 0.3) 100%),
-        linear-gradient(0deg, rgba(9, 17, 30, 0.55) 0%, rgba(9, 17, 30, 0) 38%);
+        linear-gradient(96deg, rgba(12, 23, 38, 0.9) 0%, rgba(12, 23, 38, 0.62) 48%, rgba(12, 23, 38, 0.3) 100%),
+        linear-gradient(0deg, rgba(12, 23, 38, 0.55) 0%, rgba(12, 23, 38, 0) 38%);
 }
 .hero-inner {
     position: relative;
@@ -291,7 +296,11 @@ section { scroll-margin-top: var(--header-h); }
 /* ============ Sections（共通） ============ */
 .section { padding: 120px 0; }
 .section-wash { background-color: var(--wash); }
-.section-beige { background-color: var(--beige); }
+.section-beige {
+    background-color: var(--beige);
+    /* ベージュ地ではAAコントラスト確保のためmutedを濃く */
+    --muted: rgba(22, 36, 58, 0.72);
+}
 .section-rule { border-top: 1px solid var(--line); }
 
 /* 見出し：英字セリフ大＋日本語明朝（NO&T式の左揃えペア） */
@@ -448,7 +457,7 @@ section { scroll-margin-top: var(--header-h); }
 .region-table { border-top: 1px solid var(--line-strong); }
 .region-row {
     display: grid;
-    grid-template-columns: 132px 1fr 72px;
+    grid-template-columns: 140px 1fr;
     gap: 20px;
     align-items: baseline;
     border-bottom: 1px solid var(--line);
@@ -467,24 +476,6 @@ section { scroll-margin-top: var(--header-h); }
     font-size: 14.5px;
     color: var(--muted);
 }
-.region-count {
-    margin: 0;
-    font-family: var(--font-en);
-    font-size: 24px;
-    text-align: right;
-    color: var(--ink);
-}
-.region-unit {
-    font-family: var(--font-jp);
-    font-size: 12px;
-    margin-left: 4px;
-    color: var(--muted);
-}
-.region-total {
-    border-bottom: 1px solid var(--line-strong);
-    background-color: transparent;
-}
-.region-total .region-count { font-size: 30px; }
 
 .map-figure { margin: 0; }
 .map-figure img {
@@ -519,7 +510,7 @@ section { scroll-margin-top: var(--header-h); }
     font-family: var(--font-min);
     font-size: 21px;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     color: var(--ink);
 }
 .portrait-en {
@@ -628,7 +619,7 @@ section { scroll-margin-top: var(--header-h); }
     letter-spacing: 0.08em;
 }
 .gov-hub .g-hub-desc {
-    fill: rgba(22, 36, 58, 0.6);
+    fill: rgba(22, 36, 58, 0.64); /* = --muted */
     font-family: var(--font-jp);
     font-size: 11.5px;
     letter-spacing: 0.04em;
@@ -705,15 +696,14 @@ section { scroll-margin-top: var(--header-h); }
     gap: 64px 88px;
 }
 .case {
-    border-top: 1px solid var(--ink);
+    border-top: 1px solid var(--line-strong);
     padding-top: 26px;
 }
 .case-label {
     margin: 0 0 14px;
     font-family: var(--font-en);
     font-size: 13px;
-    letter-spacing: 0.24em;
-    text-transform: uppercase;
+    letter-spacing: 0.22em;
     color: var(--muted);
 }
 .case h3 {
@@ -765,17 +755,17 @@ section { scroll-margin-top: var(--header-h); }
 .rel-node-hic .r-sub {
     fill: rgba(255, 255, 255, 0.65);
     font-family: var(--font-en);
-    font-size: 12px;
+    font-size: 13px;
     letter-spacing: 0.12em;
 }
 .rel-arrows line {
-    stroke: rgba(22, 36, 58, 0.45);
+    stroke: var(--line-strong);
     stroke-width: 1;
 }
 .rel-labels text {
     fill: var(--muted);
     font-family: var(--font-jp);
-    font-size: 12.5px;
+    font-size: 14px;
     letter-spacing: 0.04em;
 }
 .rel-caption {
@@ -784,6 +774,39 @@ section { scroll-margin-top: var(--header-h); }
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 0.1em;
+}
+
+/* 図の代替リスト（モバイル時のみ表示） */
+.relation-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.relation-list li {
+    border-top: 1px solid var(--line);
+    padding: 16px 2px;
+}
+.relation-list .rl-flow {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+}
+.relation-list .rl-desc {
+    display: block;
+    margin-top: 2px;
+    font-size: 13.5px;
+    color: var(--muted);
+}
+.relation-list .rl-caption {
+    border-top: 1px solid var(--line-strong);
+    font-family: var(--font-min);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink);
 }
 
 /* ============ Pitfalls ============ */
@@ -823,7 +846,7 @@ section { scroll-margin-top: var(--header-h); }
     border-collapse: collapse;
 }
 .category-table th {
-    border-bottom: 1px solid var(--ink);
+    border-bottom: 1px solid var(--line-strong);
     padding: 14px 18px;
     font-size: 12px;
     font-weight: 600;
@@ -853,14 +876,14 @@ section { scroll-margin-top: var(--header-h); }
     grid-template-columns: 180px 1fr;
     gap: 32px;
     margin-top: 64px;
-    border-top: 1px solid var(--ink);
+    border-top: 1px solid var(--line-strong);
     padding-top: 32px;
 }
 .compliance-label {
     margin: 0;
     font-family: var(--font-en);
-    font-size: 17px;
-    letter-spacing: 0.18em;
+    font-size: 13px;
+    letter-spacing: 0.22em;
     color: var(--ink);
 }
 .compliance-text {
@@ -892,7 +915,7 @@ section { scroll-margin-top: var(--header-h); }
     font-family: var(--font-min);
     font-size: 22px;
     font-weight: 600;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.06em;
     color: var(--ink);
 }
 .member-role {
@@ -909,7 +932,7 @@ section { scroll-margin-top: var(--header-h); }
 }
 
 /* ============ Contact ============ */
-.section-contact { border-top: 1px solid var(--line); }
+.section-contact { background-color: var(--paper); }
 .contact-lead {
     margin: 6px 0 48px;
     font-size: 15.5px;
@@ -955,8 +978,18 @@ section { scroll-margin-top: var(--header-h); }
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
-    outline: none;
     border-color: var(--ink);
+}
+/* インラインのエラー枠に上書きされない可視フォーカス */
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+.table-scroll:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
 }
 .form-field textarea { resize: vertical; }
 .form-submit { margin-top: 12px; }
@@ -1023,10 +1056,11 @@ section { scroll-margin-top: var(--header-h); }
     letter-spacing: 0.06em;
     color: rgba(255, 255, 255, 0.55);
 }
-/* 親ブランド表記：主張しすぎない、落とした文字色 */
-.curated { color: rgba(255, 255, 255, 0.42); margin-left: 4px; }
-.curated a { color: rgba(255, 255, 255, 0.5); }
-.curated a:hover { color: rgba(255, 255, 255, 0.72); }
+/* 親ブランド表記：主張しすぎない、落とした文字色
+   （AAコントラスト確保のため0.55。これ以上は下げない） */
+.curated { color: rgba(255, 255, 255, 0.55); margin-left: 4px; }
+.curated a { color: rgba(255, 255, 255, 0.6); }
+.curated a:hover { color: rgba(255, 255, 255, 0.8); }
 
 /* ============ Slide-in CTA（仕様準拠：黒背景・細いブルーライン） ============ */
 .slidein-cta {
@@ -1038,7 +1072,7 @@ section { scroll-margin-top: var(--header-h); }
     max-width: calc(100vw - 56px);
     padding: 26px 28px 26px;
     background-color: var(--ink-bg);
-    border-top: 1px solid #3e7cc0;
+    border-top: 1px solid var(--accent-on-dark);
     opacity: 0;
     transform: translateY(14px);
     visibility: hidden;
@@ -1055,17 +1089,18 @@ section { scroll-margin-top: var(--header-h); }
     line-height: 2;
     color: rgba(255, 255, 255, 0.82);
 }
+/* ヘッダーの.btn-contactと同一仕様（クラス名はmain.jsのフック用に維持） */
 .btn-slidein {
     display: inline-block;
-    padding: 9px 30px;
+    padding: 9px 26px;
     font-family: var(--font-en);
-    font-size: 13px;
+    font-size: 14px;
     letter-spacing: 0.14em;
     color: #ffffff;
-    border: 1px solid rgba(255, 255, 255, 0.55);
-    transition: background-color 0.25s ease, color 0.25s ease;
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
-.btn-slidein:hover { background-color: #ffffff; color: var(--ink); }
+.btn-slidein:hover { background-color: #ffffff; color: var(--ink); border-color: #ffffff; }
 .slidein-close {
     position: absolute;
     top: 8px;
@@ -1093,6 +1128,9 @@ section { scroll-margin-top: var(--header-h); }
     .feature-cols, .issue-cols { gap: 40px; }
     .case-grid { gap: 48px 56px; }
     .member-row { grid-template-columns: 130px 190px 1fr; gap: 32px; }
+    /* 8frカラム内で3列が窮屈になるため統計を詰める */
+    .stat { padding: 4px 18px 0; }
+    .stat-number { font-size: 44px; }
 }
 
 @media (max-width: 900px) {
@@ -1187,13 +1225,14 @@ section { scroll-margin-top: var(--header-h); }
     .stat-number { font-size: 44px; }
 
     .def-row, .cv-row { grid-template-columns: 1fr; gap: 4px; padding: 14px 2px; }
-    .region-row { grid-template-columns: 1fr 56px; gap: 4px 16px; }
-    .region-cities { grid-column: 1; }
-    .region-count { grid-row: 1 / 3; grid-column: 2; align-self: center; }
+    .region-row { grid-template-columns: 1fr; gap: 4px; padding: 16px 2px; }
 
     .ivs-note { flex-direction: column; gap: 22px; }
 
     .relation-lead { margin-bottom: 36px; }
+    /* 縮小するとSVG内テキストが判読不能になるためリスト表現へ切替 */
+    .relation-diagram { display: none; }
+    .relation-list { display: block; }
 
     .compliance-note { grid-template-columns: 1fr; gap: 12px; margin-top: 48px; }
 

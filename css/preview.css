@@ -237,7 +237,8 @@ section { scroll-margin-top: var(--header-h); }
 /* ============ Hero ============ */
 .hero {
     position: relative;
-    min-height: 86vh;
+    min-height: 100vh;
+    min-height: 100svh; /* モバイルのアドレスバー高を考慮（未対応ブラウザは100vhにフォールバック） */
     display: flex;
     align-items: flex-end;
     background-color: var(--ink-bg);
@@ -1210,7 +1211,7 @@ section { scroll-margin-top: var(--header-h); }
     .sec-en { font-size: 32px; }
     .sec-ja { font-size: 20px; }
 
-    .hero { min-height: 92vh; }
+    .hero { min-height: 100vh; min-height: 100svh; }
     .hero-inner { padding-top: calc(var(--header-h) + 40px); padding-bottom: 72px; }
     .hero-org { font-size: 10.5px; line-height: 2; margin-bottom: 26px; }
     .hero-title { font-size: 25px; line-height: 1.9; letter-spacing: 0.04em; }

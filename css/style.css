@@ -791,6 +791,26 @@ section { scroll-margin-top: var(--header-h); }
     text-align: left;
     color: var(--text);
 }
+.member-link {
+    margin: 12px 0 0;
+    font-size: 13px;
+    text-align: left;
+}
+.member-link a {
+    color: var(--blue);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+.member-link a:hover { border-bottom-color: var(--blue); }
+
+/* 三者間関係：サブ見出し（PPTの「監査法人からの依頼要求」） */
+.relation-sublabel {
+    margin: 18px 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--navy);
+}
+#relation .section-lead { margin-top: 0; }
 
 /* ============ Contact ============ */
 .section-contact {

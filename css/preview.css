@@ -396,8 +396,16 @@ section { scroll-margin-top: var(--header-h); }
 }
 
 /* ============ About ============ */
+.about-poslabel {
+    margin: 0 0 14px;
+    font-family: var(--font-min);
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+}
 .about-statement {
-    margin: 6px 0 0;
+    margin: 0;
     font-size: 16.5px;
     line-height: 2.3;
     letter-spacing: 0.04em;
@@ -725,11 +733,19 @@ section { scroll-margin-top: var(--header-h); }
 
 /* ============ Relation（三者関係SVG） ============ */
 .relation-lead {
-    margin: 6px 0 56px;
+    margin: 0 0 18px;
     font-size: 15.5px;
     line-height: 2.2;
 }
-.relation-diagram { max-width: 680px; }
+.relation-sublabel {
+    margin: 24px 0 8px;
+    font-family: var(--font-min);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+}
+.relation-diagram { max-width: 680px; margin-top: 44px; }
 .relation-diagram svg {
     width: 100%;
     height: auto;
@@ -931,6 +947,17 @@ section { scroll-margin-top: var(--header-h); }
     line-height: 2.05;
     color: var(--muted);
 }
+.member-link {
+    margin: 12px 0 0;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+}
+.member-link a {
+    color: var(--accent);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+}
+.member-link a:hover { border-bottom-color: var(--accent); }
 
 /* ============ Contact ============ */
 .section-contact { background-color: var(--paper); }
@@ -1200,7 +1227,7 @@ section { scroll-margin-top: var(--header-h); }
     }
     .member-photo { grid-area: photo; }
     .member-id { grid-area: id; align-self: center; }
-    .member-bio { grid-area: bio; }
+    .member-text { grid-area: bio; }
 }
 
 @media (max-width: 640px) {

@@ -961,3 +961,70 @@ table.cat td:first-child { font-weight: 700; color: var(--navy); white-space: no
     .cta-band-title { font-size: 22px; }
     .cta-band-inner { padding-top: 72px; padding-bottom: 72px; }
 }
+
+/* ============================================================
+   Reference-derived sections（比較 / フロー / FAQ）
+   PPT準拠のカード調（角丸・上アクセント）。マークは✓/✕のテキスト。
+   配色はnavy/blueのみ。
+   ============================================================ */
+.sec-lead { margin: 16px 0 0; max-width: 780px; font-size: 15px; line-height: 1.85; color: var(--muted); }
+
+/* ---- Comparison（中抜き vs 直接体制） ---- */
+.compare-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch; }
+.compare-card { border: 1px solid var(--line); border-radius: 12px; padding: 34px 30px; background-color: var(--tile); }
+.compare-tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; padding: 5px 14px; border-radius: 999px; margin-bottom: 18px; }
+.compare-card h3 { margin: 0 0 20px; font-size: 18px; font-weight: 700; line-height: 1.5; color: var(--navy); }
+.compare-card ul { list-style: none; margin: 0; padding: 0; }
+.compare-card li { position: relative; padding-left: 28px; margin-bottom: 13px; font-size: 14.5px; line-height: 1.7; }
+.compare-card li:last-child { margin-bottom: 0; }
+.compare-card li::before { position: absolute; left: 0; top: 1px; font-weight: 700; }
+.compare-card--neg { background-color: var(--wash); border-top: 3px solid var(--slate); }
+.compare-tag--neg { background-color: #e8edf2; color: var(--muted); }
+.compare-card--neg li { color: var(--muted); }
+.compare-card--neg li::before { content: "\2715"; color: #9aa7b5; }
+.compare-card--pos { background-color: var(--navy); border-color: var(--navy); border-top: 3px solid var(--blue-bright); box-shadow: 0 18px 40px rgba(0, 51, 102, 0.16); }
+.compare-tag--pos { background-color: rgba(255,255,255,0.16); color: #cfe0f2; }
+.compare-card--pos h3 { color: #ffffff; }
+.compare-card--pos li { color: rgba(255,255,255,0.9); }
+.compare-card--pos li::before { content: "\2713"; color: var(--blue-light); }
+.compare-vs { display: flex; align-items: center; justify-content: center; padding: 0 20px; }
+.compare-vs span {
+    width: 48px; height: 48px; border-radius: 50%;
+    background-color: #ffffff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); color: var(--navy); font-size: 14px;
+    box-shadow: 0 8px 20px rgba(0,51,102,0.08);
+}
+@media (max-width: 840px) {
+    .compare-grid { grid-template-columns: 1fr; gap: 16px; }
+    .compare-vs { padding: 4px 0; }
+    .compare-vs span { transform: rotate(90deg); }
+}
+
+/* ---- Process flow（番号バッジ＋つなぎの › ） ---- */
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: flow; }
+.flow-step { position: relative; background-color: var(--tile); border: 1px solid var(--line); border-radius: 12px; padding: 30px 22px 26px; text-align: center; counter-increment: flow; }
+.flow-num { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin: 0 auto 16px; border-radius: 50%; background-color: var(--navy); color: #fff; font-family: var(--font-en); font-size: 17px; }
+.flow-num::before { content: counter(flow, decimal-leading-zero); }
+.flow-step h3 { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: var(--navy); }
+.flow-step p { margin: 0; font-size: 13.5px; line-height: 1.8; color: var(--muted); }
+.flow-step:not(:last-child)::after { content: "\203A"; position: absolute; right: -14px; top: 40px; color: var(--slate); font-size: 20px; font-family: var(--font-en); }
+@media (max-width: 860px) {
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow-step:nth-child(2n)::after { display: none; }
+}
+@media (max-width: 520px) {
+    .flow { grid-template-columns: 1fr; }
+    .flow-step::after { display: none !important; }
+}
+
+/* ---- FAQ（カード・details/summary） ---- */
+.faq { max-width: 880px; }
+.faq-item { border: 1px solid var(--line); border-radius: 10px; background-color: var(--paper); margin-bottom: 14px; overflow: hidden; }
+.section-wash .faq-item { background-color: #ffffff; }
+.faq-item summary { list-style: none; cursor: pointer; padding: 22px 56px 22px 24px; position: relative; font-weight: 700; font-size: 15.5px; color: var(--navy); line-height: 1.6; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: "Q"; font-family: var(--font-en); color: var(--blue); margin-right: 14px; }
+.faq-item summary::after { content: "\002b"; position: absolute; right: 24px; top: 50%; transform: translateY(-50%); color: var(--slate); font-size: 18px; }
+.faq-item[open] summary::after { content: "\2212"; }
+.faq-body { padding: 0 24px 24px 50px; font-size: 14px; line-height: 1.9; color: var(--muted); }

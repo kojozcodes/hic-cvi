@@ -1194,3 +1194,110 @@ section { scroll-margin-top: var(--header-h); }
     .cta-band-title { font-size: 22px; }
     .cta-band-inner { padding-top: 72px; padding-bottom: 72px; }
 }
+
+/* ============================================================
+   Reference-derived sections（比較 / フロー / FAQ）
+   参考日系コーポレートサイトの構成を踏襲。配色はnavy/blueのみ。
+   ============================================================ */
+.section-head.center { text-align: center; }
+.section-head.center .section-lead { margin-left: auto; margin-right: auto; }
+
+/* ---- Comparison（中抜き vs 直接体制） ---- */
+.compare-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+    max-width: 980px;
+    margin: 0 auto;
+}
+.compare-card {
+    border-radius: 10px;
+    padding: 36px 32px;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+}
+.compare-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 5px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+}
+.compare-card h3 { margin: 0 0 22px; font-size: 19px; line-height: 1.5; color: var(--navy); }
+.compare-card ul { list-style: none; margin: 0; padding: 0; }
+.compare-card li { position: relative; padding-left: 30px; margin-bottom: 14px; font-size: 14.5px; line-height: 1.7; }
+.compare-card li:last-child { margin-bottom: 0; }
+.compare-card li i { position: absolute; left: 0; top: 5px; font-size: 14px; }
+.compare-card--neg { background-color: var(--bg-alt); }
+.compare-tag--neg { background-color: #e8edf2; color: var(--text-muted); }
+.compare-card--neg li { color: var(--text-muted); }
+.compare-card--neg li i { color: #9aa7b5; }
+.compare-card--pos { background-color: var(--navy); border-color: var(--navy); box-shadow: 0 22px 48px rgba(0, 40, 79, 0.18); }
+.compare-tag--pos { background-color: rgba(255,255,255,0.16); color: #cfe0f2; }
+.compare-card--pos h3 { color: #ffffff; }
+.compare-card--pos li { color: rgba(255,255,255,0.9); }
+.compare-card--pos li i { color: #7fb3e0; }
+.compare-vs { display: flex; align-items: center; justify-content: center; padding: 0 22px; }
+.compare-vs span {
+    width: 50px; height: 50px; border-radius: 50%;
+    background-color: #ffffff; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-en); font-weight: 700; color: var(--navy); font-size: 14px;
+    box-shadow: 0 8px 20px rgba(0,51,102,0.08);
+}
+@media (max-width: 840px) {
+    .compare-grid { grid-template-columns: 1fr; gap: 16px; }
+    .compare-vs { padding: 4px 0; }
+    .compare-vs span { transform: rotate(90deg); }
+}
+
+/* ---- Process flow（番号＋つなぎの矢印） ---- */
+.flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: flow; }
+.flow-step {
+    position: relative;
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 32px 22px 26px;
+}
+.flow-num {
+    counter-increment: flow;
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; margin-bottom: 16px;
+    border-radius: 50%; background-color: var(--blue-soft);
+    color: var(--navy); font-family: var(--font-en); font-weight: 700; font-size: 16px;
+}
+.flow-num::before { content: counter(flow, decimal-leading-zero); }
+.flow-step h3 { margin: 0 0 8px; font-size: 15.5px; line-height: 1.5; color: var(--navy); }
+.flow-step p { margin: 0; font-size: 13.5px; line-height: 1.8; color: var(--text-muted); }
+.flow-step:not(:last-child)::after {
+    content: "\f054"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; right: -14px; top: 46px; color: var(--slate); font-size: 13px; z-index: 1;
+}
+@media (max-width: 860px) {
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow-step:nth-child(2n)::after { display: none; }
+}
+@media (max-width: 520px) {
+    .flow { grid-template-columns: 1fr; }
+    .flow-step::after { display: none !important; }
+}
+
+/* ---- FAQ（CSSのみ・details/summary） ---- */
+.faq { max-width: 860px; margin: 0 auto; }
+.faq-item { border: 1px solid var(--line); border-radius: 8px; background-color: var(--bg); margin-bottom: 14px; overflow: hidden; }
+.faq-item summary {
+    list-style: none; cursor: pointer;
+    padding: 22px 56px 22px 24px; position: relative;
+    font-weight: 600; font-size: 15.5px; color: var(--navy); line-height: 1.6;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::before { content: "Q"; font-family: var(--font-en); color: var(--blue); font-weight: 700; margin-right: 14px; }
+.faq-item summary::after {
+    content: "\002b"; position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+    color: var(--slate); font-size: 18px;
+}
+.faq-item[open] summary::after { content: "\2212"; }
+.faq-body { padding: 0 24px 24px 50px; font-size: 14px; line-height: 1.9; color: var(--text-muted); }

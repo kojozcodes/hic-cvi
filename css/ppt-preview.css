@@ -1,0 +1,394 @@
+/* ============================================================
+   HIC/CVI Japan Desk — PPT EXACT REPLICA  (/ppt-preview)
+   ------------------------------------------------------------
+   Goal: reproduce PPT v1.4 slide-by-slide, exactly as arranged.
+   Each slide is a fixed 1280x720 "slide-container", scaled to
+   fit the viewport by js (see inline scaler in ppt-preview.html).
+   Icons & the three-party diagram are the PPT's own assets
+   (assets/ppt/*). Photos/map from assets/img/*.
+   ============================================================ */
+
+:root {
+    --navy: #003366;
+    --blue: #0056b3;
+    --ink: #334155;
+    --muted: #64748b;
+    --line: #e2e8f0;
+    --bg: #f1f5f9;
+    --tile: #f8fafc;
+    --slate: #94a3b8;
+    --red: #e11d48;
+    --red-deep: #be123c;
+    --font-jp: 'Noto Sans JP', 'Yu Gothic', 'Hiragino Sans', sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    font-family: var(--font-jp);
+    padding: 40px 0 60px;
+}
+
+.deck-head {
+    max-width: 1280px;
+    margin: 0 auto 28px;
+    padding: 0 24px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+.deck-head strong { color: var(--navy); }
+
+/* scaler wrapper keeps layout height correct after transform:scale */
+.slide-scaler {
+    margin: 0 auto 40px;
+    width: 1280px;          /* overridden inline by JS to scaled px */
+}
+
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    transform-origin: top left;   /* JS scales from here */
+}
+/* PPT slides' thin gradient top bar */
+.slide-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 8px;
+    background: linear-gradient(90deg, #002a54 0%, #0067c0 100%);
+}
+
+/* typography */
+.slide-container h1, .slide-container h2,
+.slide-container h3, .slide-container h4 {
+    color: var(--navy);
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+}
+.slide-container h2 { font-size: 38px; }
+.slide-container h3 { font-size: 23px; }
+.slide-container h4 { font-size: 19px; }
+.slide-container p, .slide-container li,
+.slide-container td, .slide-container th {
+    color: var(--ink);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.65;
+}
+
+/* slide title with left accent bar (matches PPT ▌heading) */
+.slide-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+}
+.slide-title::before {
+    content: '';
+    width: 7px;
+    height: 34px;
+    background-color: var(--navy);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+.content-area { flex: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; }
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    width: 100%;
+    align-items: center;
+}
+.image-box {
+    width: 100%;
+    height: 420px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+.image-box img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.image-box.contain { box-shadow: none; }
+.image-box.contain img { object-fit: contain; }
+
+/* ---------- Slide 1 : title ---------- */
+.title-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0;
+}
+.title-eyebrow { font-size: 24px; font-weight: 700; color: var(--blue); margin: 0 0 18px; letter-spacing: 0.02em; }
+.title-main { font-size: 50px; font-weight: 700; line-height: 1.32; margin: 0; }
+.title-main .accent { color: var(--blue); }
+.title-sub { font-size: 22px; color: var(--ink); margin: 22px 0 0; }
+.title-pill {
+    margin: 44px 0 0;
+    background-color: var(--navy);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 13px 34px;
+    border-radius: 40px;
+}
+.title-date { margin: 30px 0 0; font-size: 13px; color: var(--slate); }
+
+/* ---------- Slide 2 : 3 feature tiles ---------- */
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    width: 100%;
+    align-items: stretch;
+}
+.tile {
+    background-color: var(--tile);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--blue);
+    border-radius: 10px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+}
+.tile.center { align-items: center; text-align: center; }
+.tile .tile-icon { width: 56px; height: 56px; object-fit: contain; margin-bottom: 18px; }
+.tile h3 { margin: 0 0 14px; }
+.tile p { font-size: 15px; text-align: left; margin: 0; }
+.tile p strong { color: var(--navy); font-weight: 700; }
+
+/* ---------- Slide 3 : org table + note ---------- */
+table.info { width: 100%; border-collapse: collapse; }
+table.info th, table.info td {
+    padding: 13px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    vertical-align: top;
+}
+table.info th {
+    background-color: var(--bg);
+    color: var(--navy);
+    font-weight: 700;
+    white-space: nowrap;
+    width: 92px;
+}
+.note {
+    margin-top: 22px;
+    padding: 18px 20px;
+    background-color: var(--bg);
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+.note img { width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px; }
+.note p { font-size: 14px; margin: 0; line-height: 1.7; }
+.note strong { color: var(--navy); }
+
+/* ---------- Slide 4 : map + region grid ---------- */
+.region-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-content: center;
+}
+.region-grid .full { grid-column: 1 / -1; }
+.region-box {
+    background-color: var(--tile);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--navy);
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+.region-box .rname { font-weight: 700; color: var(--navy); font-size: 15px; margin: 0 0 5px; }
+.region-box .rcities { font-size: 13.5px; color: var(--ink); margin: 0; line-height: 1.55; }
+
+/* ---------- Slide 5 / 6 : check list ---------- */
+.check-list { list-style: none; margin: 0; padding: 0; }
+.check-list li {
+    position: relative;
+    padding-left: 32px;
+    margin-bottom: 14px;
+    font-size: 15px;
+    line-height: 1.6;
+    background: url('../assets/ppt/ic-check.png') no-repeat left 3px;
+    background-size: 19px 19px;
+}
+.check-list li:last-child { margin-bottom: 0; }
+.check-list strong { color: var(--navy); }
+.person-name { font-size: 24px; color: var(--navy); font-weight: 700; margin: 0 0 4px; }
+.person-name span { font-size: 16px; color: var(--muted); font-weight: 400; }
+.person-role { font-size: 15px; color: var(--blue); font-weight: 700; margin: 0 0 22px; }
+
+.callout {
+    background-color: var(--bg);
+    border-left: 4px solid var(--blue);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 22px;
+}
+.callout p { margin: 0; font-size: 15px; }
+.sub-head { font-size: 18px; color: var(--navy); font-weight: 700; margin: 0 0 10px; }
+
+/* ---------- Slide 7 : government network ---------- */
+.gov-lead { text-align: center; font-size: 16px; margin: 0 0 26px; color: var(--ink); }
+.gov-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 26px;
+}
+.gov-box {
+    flex: 1;
+    max-width: 300px;
+    background-color: var(--tile);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--blue);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: center;
+}
+.gov-box.hub { background-color: var(--navy); border-top-color: var(--navy); }
+.gov-box h4 { margin: 0 0 6px; }
+.gov-box.hub h4 { color: #ffffff; }
+.gov-box p { margin: 0; font-size: 13.5px; color: var(--muted); }
+.gov-box.hub p { color: #cbd5e1; }
+.gov-link { display: flex; align-items: center; }
+.gov-link img { width: 34px; height: 34px; opacity: 0.7; }
+.gov-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.gov-chip {
+    background-color: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 9px 18px;
+    font-size: 14px;
+    color: var(--navy);
+    font-weight: 500;
+}
+
+/* ---------- Slide 8 / 10 : 2x2 grid ---------- */
+.grid-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    width: 100%;
+    height: 100%;
+}
+.grid-2x2 .tile { background-color: var(--tile); }
+.usecase-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.usecase-head img { width: 30px; height: 30px; object-fit: contain; }
+.usecase-head h3 { margin: 0; font-size: 20px; }
+.dot-list { list-style: none; margin: 0; padding: 0; }
+.dot-list li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 7px;
+    font-size: 14.5px;
+    line-height: 1.55;
+}
+.dot-list li::before {
+    content: '';
+    position: absolute;
+    left: 2px; top: 9px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background-color: var(--blue);
+}
+.case-card { border-top: 3px solid var(--blue); }
+.case-card h3 { margin: 0 0 10px; }
+.case-card p { margin: 0; font-size: 14.5px; }
+
+/* ---------- Slide 9 : members ---------- */
+.members { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; width: 100%; align-items: stretch; }
+.mcard {
+    background-color: var(--tile);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px 22px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mcard .mphoto { width: 110px; height: 124px; border-radius: 8px; overflow: hidden; margin-bottom: 14px; }
+.mcard .mphoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mcard .mrole { font-size: 13px; color: var(--blue); font-weight: 700; margin: 0 0 4px; }
+.mcard h3 { font-size: 20px; margin: 0 0 12px; }
+.mcard .mbio { font-size: 12.5px; color: var(--ink); text-align: left; line-height: 1.65; margin: 0; }
+.mcard .mlink { font-size: 12.5px; margin: 8px 0 0; text-align: left; width: 100%; }
+.mcard .mlink a { color: var(--blue); text-decoration: none; word-break: break-all; }
+.mcard .mlink a:hover { text-decoration: underline; }
+
+/* ---------- Slide 11 : three-party diagram ---------- */
+.relation-fig { width: 100%; }
+.relation-fig img { width: 100%; height: auto; display: block; }
+
+/* ---------- Slide 12 : pitfalls ---------- */
+.slide-title.danger { color: var(--navy); }
+.pitfalls { display: flex; gap: 24px; width: 100%; align-items: stretch; }
+.pitfall {
+    flex: 1;
+    background-color: #fff1f2;
+    border: 1px solid #fecdd3;
+    border-top: 3px solid var(--red);
+    border-radius: 10px;
+    padding: 26px 24px;
+    display: flex;
+    flex-direction: column;
+}
+.pitfall img { width: 36px; height: 36px; object-fit: contain; margin-bottom: 14px; }
+.pitfall h3 { color: var(--navy); margin: 0 0 12px; font-size: 20px; }
+.pitfall p { margin: 0; font-size: 14.5px; }
+
+/* ---------- Slide 13 : category table + compliance ---------- */
+table.cat { width: 100%; border-collapse: collapse; margin-bottom: 22px; }
+table.cat th {
+    background-color: var(--bg);
+    color: var(--navy);
+    font-weight: 700;
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 2px solid var(--navy);
+    font-size: 14px;
+}
+table.cat td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+    vertical-align: top;
+}
+table.cat td:first-child { font-weight: 700; color: var(--navy); white-space: nowrap; }
+.compliance {
+    background-color: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 18px 22px;
+}
+.compliance p { margin: 0; font-size: 14px; line-height: 1.75; }
+.compliance b { color: var(--navy); }
+
+/* ============ Responsive note ============ */
+@media (max-width: 1360px) {
+    .deck-head { padding: 0 24px; }
+}

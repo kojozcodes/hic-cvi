@@ -1,0 +1,454 @@
+/* ============================================================
+   HIC/CVI Japan Desk — Flagship design system  [site.css]
+   ------------------------------------------------------------
+   "Quiet authority, boldly set." 静かな高級感 / 実務家集団 を
+   軸に、大胆なタイポ・スケールと余白、深いネイビー＋抑制された
+   azureアクセント、上質な写真・データ可視化で構成する一枚物。
+   配色は navy / white / gray のみ（red・gold 不使用）。
+   モーションは css/award.css + js/award.js（Lenis + GSAP）。
+   本文・データは PPT v1.4（クライアント承認済み）のみ。
+   ============================================================ */
+
+:root {
+    --ink: #0c1a2b;            /* 本文・濃色 */
+    --navy: #102a45;           /* ブランドネイビー */
+    --navy-deep: #08172a;      /* 最暗：ヒーロー/ダーク節/フッター */
+    --azure: #2b76b9;          /* アクセント（リンク/ラベル/罫線。抑制的に） */
+    --azure-deep: #1f5f9c;
+    --azure-soft: #eaf2f9;
+    --on-dark: #f4f8fc;
+    --on-dark-soft: rgba(244, 248, 252, 0.66);
+    --on-dark-azure: #6aa6d8;
+    --paper: #ffffff;
+    --bg: #f6f9fc;             /* ページ地（柔らかなオフホワイト） */
+    --wash: #eef3f8;           /* 交互の淡色帯 */
+    --line: rgba(12, 26, 43, 0.12);
+    --line-2: rgba(12, 26, 43, 0.24);
+    --muted: rgba(12, 26, 43, 0.6);
+    --grad: linear-gradient(135deg, #102a45 0%, #2b76b9 100%);
+
+    --serif-jp: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+    --serif-en: 'Marcellus', 'Times New Roman', serif;
+    --sans: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+
+    --container: 1240px;
+    --header-h: 80px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    margin: 0;
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.95;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--azure); text-decoration: none; }
+.pc-only { display: inline; }
+::selection { background: rgba(43, 118, 185, 0.18); }
+
+.container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
+.section { position: relative; padding: clamp(84px, 11vw, 168px) 0; }
+.section-wash { background-color: var(--wash); }
+.section-paper { background-color: var(--paper); }
+section { scroll-margin-top: var(--header-h); }
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+    position: fixed; inset: 0 0 auto 0; z-index: 100;
+    height: var(--header-h);
+    display: flex; align-items: center;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease, border-color 0.4s ease;
+}
+.header-inner {
+    width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+}
+.brand-name { font-family: var(--serif-en); font-size: 22px; letter-spacing: 0.06em; color: #fff; transition: color 0.4s ease; }
+.brand-sep { color: var(--on-dark-azure); margin: 0 1px; }
+.brand-sub { font-size: 0.62em; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.85; }
+.site-header.is-scrolled { height: 64px; background-color: rgba(255, 255, 255, 0.82); border-bottom-color: var(--line); }
+.site-header.is-scrolled .brand-name { color: var(--ink); }
+.site-header.is-scrolled .brand-sep { color: var(--azure); }
+
+.global-nav ul { display: flex; align-items: center; gap: 38px; list-style: none; margin: 0; padding: 0; }
+.global-nav a:not(.btn-contact) {
+    position: relative; font-size: 13px; font-weight: 500; letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.86); padding: 6px 0; transition: color 0.3s ease;
+}
+.global-nav a:not(.btn-contact)::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 1px;
+    background: currentColor; transition: width 0.3s ease;
+}
+.global-nav a:not(.btn-contact):hover::after { width: 100%; }
+.site-header.is-scrolled .global-nav a:not(.btn-contact) { color: var(--ink); }
+.site-header.is-scrolled .global-nav a:not(.btn-contact):hover { color: var(--azure); }
+.btn-contact {
+    font-family: var(--serif-en); font-size: 14px; letter-spacing: 0.12em;
+    padding: 9px 24px; border: 1px solid rgba(255, 255, 255, 0.5); color: #fff; border-radius: 999px;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.btn-contact:hover { background: #fff; color: var(--ink); border-color: #fff; }
+.site-header.is-scrolled .btn-contact { color: var(--ink); border-color: var(--line-2); }
+.site-header.is-scrolled .btn-contact:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+.nav-toggle { display: none; width: 44px; height: 44px; padding: 11px; background: none; border: 0; cursor: pointer; }
+.nav-toggle span { display: block; height: 1.5px; margin: 6px 0; background: #fff; transition: transform 0.3s ease, opacity 0.3s ease, background-color 0.3s ease; }
+.site-header.is-scrolled .nav-toggle span, .site-header.nav-open .nav-toggle span { background: var(--ink); }
+.site-header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.site-header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.site-header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ============================================================
+   Buttons / links
+   ============================================================ */
+.btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 0.1em;
+    padding: 16px 36px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
+    transition: filter 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.btn-arrow { font-family: var(--serif-en); transition: transform 0.3s ease; }
+.btn:hover .btn-arrow { transform: translateX(5px); }
+.btn-primary { background-image: var(--grad); background-color: var(--navy); color: #fff; box-shadow: 0 14px 30px rgba(16, 42, 69, 0.26); }
+.btn-primary:hover { filter: brightness(1.08); }
+.btn-hero { background: rgba(255, 255, 255, 0.06); color: #fff; border-color: rgba(255, 255, 255, 0.55); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); }
+.btn-hero:hover { background: #fff; color: var(--ink); border-color: #fff; }
+.btn-submit { background-image: var(--grad); background-color: var(--navy); color: #fff; min-width: 240px; justify-content: center; box-shadow: 0 14px 30px rgba(16, 42, 69, 0.3); }
+.btn-submit:hover { filter: brightness(1.08); }
+.textlink {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.1em; color: var(--ink);
+    padding-bottom: 4px; background-image: linear-gradient(currentColor, currentColor);
+    background-repeat: no-repeat; background-position: 0 100%; background-size: 100% 1px;
+    transition: background-size 0.35s ease;
+}
+.textlink:hover { background-size: 0 1px; }
+.textlink-light { color: rgba(255, 255, 255, 0.9); }
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+    position: relative; min-height: 100vh; min-height: 100svh;
+    display: flex; align-items: flex-end; background-color: var(--navy-deep); overflow: hidden;
+}
+.hero-media { position: absolute; inset: 0; background-size: cover; background-position: center 28%; }
+.hero-scrim {
+    position: absolute; inset: 0;
+    background:
+        linear-gradient(98deg, rgba(8, 23, 42, 0.94) 0%, rgba(8, 23, 42, 0.74) 42%, rgba(8, 23, 42, 0.28) 70%, rgba(8, 23, 42, 0.12) 100%),
+        linear-gradient(0deg, rgba(8, 23, 42, 0.72) 0%, rgba(8, 23, 42, 0) 46%);
+}
+.hero::after { /* 微かな光のドリフト */
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(58% 50% at 16% 78%, rgba(43, 118, 185, 0.22) 0%, rgba(43, 118, 185, 0) 62%);
+    animation: heroGlow 16s ease-in-out infinite alternate;
+}
+@keyframes heroGlow { 0% { opacity: 0.5; transform: translateY(2%); } 100% { opacity: 1; transform: translateY(-2%); } }
+.hero-inner { position: relative; z-index: 2; width: 100%; padding-top: calc(var(--header-h) + 56px); padding-bottom: clamp(64px, 11vh, 132px); }
+.hero-org { margin: 0 0 30px; font-size: 12.5px; letter-spacing: 0.1em; line-height: 2; color: rgba(255, 255, 255, 0.62); }
+.hero-org::before { content: ''; display: inline-block; width: 28px; height: 1px; background: var(--on-dark-azure); vertical-align: middle; margin-right: 14px; }
+.hero-title {
+    margin: 0 0 30px; max-width: 17em;
+    font-family: var(--serif-jp); font-weight: 600;
+    font-size: clamp(34px, 5.6vw, 76px); line-height: 1.32; letter-spacing: 0.04em; color: #fff;
+}
+.hero-lead { margin: 0 0 44px; max-width: 40em; font-size: clamp(14px, 1.2vw, 16px); line-height: 2.2; color: rgba(255, 255, 255, 0.82); }
+.hero-actions { display: flex; align-items: center; gap: 32px; flex-wrap: wrap; }
+.scroll-cue { position: absolute; left: 50%; bottom: 26px; z-index: 2; transform: translateX(-50%); width: 1px; height: 56px; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,0.6)); overflow: hidden; }
+.scroll-cue::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.95); animation: cue 2.2s cubic-bezier(0.7,0,0.3,1) infinite; }
+@keyframes cue { 0% { transform: translateY(-100%); } 60%,100% { transform: translateY(100%); } }
+
+/* ============================================================
+   Section header system（番号＋英字ラベル＋明朝タイトル）
+   ============================================================ */
+.sec-head { position: relative; max-width: 940px; margin-bottom: clamp(44px, 5.5vw, 72px); }
+.sec-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+.sec-kicker { display: inline-flex; align-items: center; gap: 14px; margin: 0 0 22px; font-family: var(--serif-en); font-size: 15px; letter-spacing: 0.16em; color: var(--azure); }
+.sec-kicker::before { content: ''; width: 30px; height: 1px; background: var(--azure); }
+.sec-head.center .sec-kicker { justify-content: center; }
+.sec-title { margin: 0; font-family: var(--serif-jp); font-weight: 600; font-size: clamp(27px, 3.6vw, 46px); line-height: 1.45; letter-spacing: 0.05em; color: var(--ink); }
+.sec-lead { margin: 26px 0 0; max-width: 700px; font-size: 15.5px; line-height: 2.1; color: var(--muted); }
+.sec-head.center .sec-lead { margin-left: auto; margin-right: auto; }
+/* 大きな淡いインデックス番号（上質な奥行き） */
+.sec-index { position: absolute; top: -0.36em; right: 0; font-family: var(--serif-en); font-size: clamp(80px, 11vw, 168px); line-height: 0.8; color: rgba(12, 26, 43, 0.05); pointer-events: none; user-select: none; }
+.section-dark .sec-index { color: rgba(255, 255, 255, 0.06); }
+
+/* dark節での見出し色 */
+.section-dark { background-color: var(--navy-deep); background-image: linear-gradient(165deg, #08172a 0%, #0e2742 100%); color: var(--on-dark); }
+.section-dark .sec-title { color: #fff; }
+.section-dark .sec-kicker { color: var(--on-dark-azure); }
+.section-dark .sec-kicker::before { background: var(--on-dark-azure); }
+.section-dark .sec-lead { color: var(--on-dark-soft); }
+
+/* ============================================================
+   01 Strengths — 3列（番号＋明朝＋本文、上罫線）
+   ============================================================ */
+.feature-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 64px); }
+.feature { position: relative; border-top: 1px solid var(--line-2); padding-top: 30px; }
+.feature-no { margin: 0 0 20px; font-family: var(--serif-en); font-size: 44px; line-height: 1; color: var(--azure); }
+.feature h3 { margin: 0 0 16px; font-family: var(--serif-jp); font-size: 21px; font-weight: 600; line-height: 1.6; letter-spacing: 0.04em; color: var(--ink); }
+.feature p { margin: 0; font-size: 14.5px; line-height: 2.05; color: var(--muted); }
+
+/* ============================================================
+   02 About — 統計グラデ面 + 定義リスト + 写真
+   ============================================================ */
+.about-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(40px, 6vw, 88px); align-items: start; }
+.about-poslabel { margin: 0 0 14px; font-family: var(--serif-jp); font-size: 16px; font-weight: 600; letter-spacing: 0.06em; color: var(--azure); }
+.about-statement { margin: 0 0 40px; font-size: 17px; line-height: 2.3; letter-spacing: 0.03em; color: var(--ink); }
+.stat-band { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 44px 40px; border-radius: 18px; background-image: var(--grad); box-shadow: 0 28px 60px rgba(16, 42, 69, 0.22); }
+.stat { padding: 0 8px; }
+.stat + .stat { border-left: 1px solid rgba(255, 255, 255, 0.2); }
+.stat-number { font-family: var(--serif-en); font-size: clamp(46px, 6vw, 76px); line-height: 0.96; color: #fff; font-variant-numeric: tabular-nums; }
+.stat-suffix { font-family: var(--sans); font-size: 0.32em; margin-left: 4px; color: rgba(255, 255, 255, 0.82); }
+.stat-label { margin: 14px 0 0; font-size: 12px; letter-spacing: 0.08em; line-height: 1.7; color: rgba(255, 255, 255, 0.8); }
+.about-figure { margin: 0 0 30px; border-radius: 14px; overflow: hidden; box-shadow: 0 22px 48px rgba(16, 42, 69, 0.14); }
+.about-figure img { width: 100%; height: auto; }
+.def-list { margin: 0; }
+.def-row { display: grid; grid-template-columns: 130px 1fr; gap: 22px; border-top: 1px solid var(--line); padding: 18px 4px; }
+.def-row:last-child { border-bottom: 1px solid var(--line); }
+.def-row dt { font-size: 14px; font-weight: 600; letter-spacing: 0.06em; color: var(--ink); }
+.def-row dd { margin: 0; font-size: 14.5px; line-height: 1.9; color: var(--muted); }
+
+/* ============================================================
+   03 Coverage — 地域リスト + 地図
+   ============================================================ */
+.cover-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+.region-table { border-top: 1px solid var(--line-2); }
+.region-row { display: grid; grid-template-columns: 140px 1fr; gap: 18px; align-items: baseline; border-bottom: 1px solid var(--line); padding: 22px 4px; }
+.region-name { margin: 0; font-family: var(--serif-jp); font-size: 16px; font-weight: 600; letter-spacing: 0.06em; color: var(--ink); }
+.region-cities { margin: 0; font-size: 14.5px; color: var(--muted); }
+.map-figure { margin: 0; padding: 18px; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 20px 44px rgba(16, 42, 69, 0.1); }
+.map-figure img { width: 100%; height: auto; }
+.map-figure figcaption { margin-top: 12px; font-size: 12px; letter-spacing: 0.08em; color: var(--muted); }
+
+/* ============================================================
+   04 Expertise — 肖像 + 経歴 + IVS
+   ============================================================ */
+.exp-grid { display: grid; grid-template-columns: minmax(240px, 320px) 1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+.portrait-figure { margin: 0; }
+.portrait-figure img { width: 100%; border-radius: 12px; box-shadow: 0 22px 48px rgba(16, 42, 69, 0.16); }
+.portrait-figure figcaption { margin-top: 18px; line-height: 1.7; }
+.portrait-name { display: block; font-family: var(--serif-jp); font-size: 22px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
+.portrait-en { display: block; margin-top: 2px; font-family: var(--serif-en); font-size: 13px; letter-spacing: 0.12em; color: var(--azure); }
+.portrait-role { display: block; margin-top: 10px; font-size: 13px; letter-spacing: 0.06em; color: var(--muted); }
+.cv-list { margin: 0 0 48px; }
+.cv-row { display: grid; grid-template-columns: 180px 1fr; gap: 26px; border-top: 1px solid var(--line); padding: 18px 4px; }
+.cv-row:last-child { border-bottom: 1px solid var(--line); }
+.cv-row dt { font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
+.cv-row dd { margin: 0; font-size: 14.5px; line-height: 1.95; color: var(--muted); }
+.ivs-note { display: grid; grid-template-columns: 110px 1fr; gap: 32px; align-items: start; padding: 34px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--azure); border-radius: 12px; }
+.ivs-cover { width: 100%; border-radius: 6px; box-shadow: 0 12px 28px rgba(16, 42, 69, 0.16); }
+.ivs-label { margin: 0 0 10px; font-family: var(--serif-jp); font-size: 17px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
+.ivs-note p:not(.ivs-label) { margin: 0 0 12px; font-size: 14px; line-height: 2; color: var(--muted); }
+.ivs-note p:last-child { margin-bottom: 0; }
+.ivs-sublabel { margin: 16px 0 6px !important; font-family: var(--serif-jp); font-size: 15px; font-weight: 600; color: var(--azure) !important; }
+
+/* ============================================================
+   05 Government — SVGハブ＆スポーク（dark）
+   ============================================================ */
+.gov-diagram { max-width: 1000px; margin: 0 auto; }
+.gov-diagram svg { width: 100%; height: auto; display: block; }
+.gov-lines line { stroke: rgba(106, 166, 216, 0.4); stroke-width: 1; }
+.gov-node .g-name { fill: #fff; font-family: var(--sans); font-size: 17px; font-weight: 600; letter-spacing: 0.04em; }
+.gov-node .g-desc { fill: rgba(255, 255, 255, 0.56); font-family: var(--sans); font-size: 12.5px; }
+.gov-hub rect { fill: url(#govgrad); rx: 8; }
+.gov-hub .g-hub-name { fill: #fff; font-family: var(--serif-en); font-size: 22px; letter-spacing: 0.08em; }
+.gov-hub .g-hub-desc { fill: rgba(255, 255, 255, 0.8); font-family: var(--sans); font-size: 11.5px; }
+.gov-list { display: none; list-style: none; margin: 0; padding: 0; }
+.gov-list li { border-top: 1px solid rgba(255, 255, 255, 0.16); padding: 18px 2px; }
+.gov-list li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
+.gov-list .g-name { display: block; font-size: 16px; font-weight: 600; color: #fff; }
+.gov-list .g-desc { display: block; margin-top: 2px; font-size: 13px; color: rgba(255, 255, 255, 0.56); }
+
+/* ============================================================
+   06 Services — 4ユースケース（2×2カード）
+   ============================================================ */
+.service-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.service-row { position: relative; background: var(--paper); border: 1px solid var(--line); border-top: 3px solid var(--azure); border-radius: 14px; padding: 38px 36px; transition: transform 0.35s ease, box-shadow 0.35s ease; }
+.service-row:hover { transform: translateY(-6px); box-shadow: 0 26px 54px rgba(16, 42, 69, 0.12); }
+.service-row h3 { margin: 0 0 20px; font-family: var(--serif-jp); font-size: 20px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
+.service-row ul { list-style: none; margin: 0; padding: 0; }
+.service-row li { position: relative; padding-left: 24px; margin-bottom: 12px; font-size: 14.5px; line-height: 1.9; color: var(--muted); }
+.service-row li:last-child { margin-bottom: 0; }
+.service-row li::before { content: ''; position: absolute; left: 2px; top: 13px; width: 7px; height: 7px; border-radius: 50%; background: var(--azure); }
+
+/* ============================================================
+   07 Case Studies — 2×2
+   ============================================================ */
+.case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 56px) clamp(40px, 5vw, 80px); }
+.case { border-top: 1px solid var(--line-2); padding-top: 28px; }
+.case-label { margin: 0 0 14px; font-family: var(--serif-en); font-size: 14px; letter-spacing: 0.16em; color: var(--azure); }
+.case h3 { margin: 0 0 14px; font-family: var(--serif-jp); font-size: 21px; font-weight: 600; letter-spacing: 0.04em; line-height: 1.55; color: var(--ink); }
+.case p { margin: 0; font-size: 14.5px; line-height: 2.05; color: var(--muted); }
+
+/* ============================================================
+   08 Relation — 三者関係SVG
+   ============================================================ */
+.relation-grid { display: grid; grid-template-columns: minmax(240px, 4fr) 8fr; gap: clamp(40px, 5vw, 80px); align-items: start; }
+.relation-lead { margin: 0 0 18px; font-size: 15.5px; line-height: 2.2; color: var(--ink); }
+.relation-sublabel { margin: 26px 0 8px; font-family: var(--serif-jp); font-size: 16px; font-weight: 600; color: var(--azure); }
+.relation-diagram { max-width: 680px; margin-top: 44px; color: var(--ink); }
+.relation-diagram svg { width: 100%; height: auto; display: block; }
+.rel-node rect { fill: var(--paper); stroke: var(--line-2); stroke-width: 1; rx: 6; }
+.rel-node .r-name { fill: var(--ink); font-family: var(--sans); font-size: 17px; font-weight: 600; letter-spacing: 0.06em; }
+.rel-node-hic rect { fill: url(#relgrad); stroke: none; }
+.rel-node-hic .r-name { fill: #fff; }
+.rel-node-hic .r-sub { fill: rgba(255, 255, 255, 0.78); font-family: var(--serif-en); font-size: 13px; letter-spacing: 0.12em; }
+.rel-arrows line { stroke: var(--line-2); stroke-width: 1.2; }
+.rel-labels text { fill: var(--muted); font-family: var(--sans); font-size: 13.5px; }
+.rel-caption { fill: var(--azure); font-family: var(--serif-jp); font-size: 15px; font-weight: 600; letter-spacing: 0.08em; }
+.relation-list { display: none; list-style: none; margin: 0; padding: 0; }
+.relation-list li { border-top: 1px solid var(--line); padding: 16px 2px; }
+.relation-list .rl-flow { display: block; font-size: 14.5px; font-weight: 600; color: var(--ink); }
+.relation-list .rl-desc { display: block; margin-top: 2px; font-size: 13.5px; color: var(--muted); }
+.relation-list .rl-caption { border-top: 1px solid var(--line-2); font-family: var(--serif-jp); font-weight: 600; color: var(--azure); }
+
+/* ============================================================
+   09 Pitfalls — 3列
+   ============================================================ */
+.issue-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 4vw, 56px); }
+.issue { border-top: 2px solid var(--azure); padding-top: 26px; }
+.issue h3 { margin: 0 0 14px; font-family: var(--serif-jp); font-size: 19px; font-weight: 600; letter-spacing: 0.04em; color: var(--ink); }
+.issue p { margin: 0; font-size: 14.5px; line-height: 2.05; color: var(--muted); }
+
+/* ============================================================
+   10 Compliance — テーブル + 注記
+   ============================================================ */
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 12px; border: 1px solid var(--line); }
+.category-table { width: 100%; min-width: 720px; border-collapse: collapse; background: var(--paper); }
+.category-table th { background: var(--navy); color: #fff; padding: 16px 20px; font-size: 12.5px; font-weight: 600; letter-spacing: 0.1em; text-align: left; white-space: nowrap; }
+.category-table td { border-bottom: 1px solid var(--line); padding: 18px 20px; font-size: 14.5px; line-height: 1.9; vertical-align: top; color: var(--muted); }
+.category-table tbody tr:last-child td { border-bottom: 0; }
+.category-table td:first-child { font-weight: 600; color: var(--ink); white-space: nowrap; }
+.compliance-note { display: grid; grid-template-columns: 150px 1fr; gap: 28px; margin-top: 40px; padding: 30px 34px; background: var(--azure-soft); border-radius: 12px; }
+.compliance-label { margin: 0; font-family: var(--serif-en); font-size: 14px; letter-spacing: 0.16em; color: var(--azure-deep); }
+.compliance-text { margin: 0; font-size: 15px; line-height: 2.1; color: var(--ink); }
+
+/* ============================================================
+   11 Members — 3名（写真＋経歴 行）
+   ============================================================ */
+.member-rows { display: grid; gap: 4px; }
+.member-row { display: grid; grid-template-columns: 130px 200px 1fr; gap: 40px; align-items: start; border-bottom: 1px solid var(--line); padding: 36px 4px; }
+.member-row:first-child { border-top: 1px solid var(--line-2); }
+.member-photo { width: 130px; }
+.member-photo img { width: 100%; aspect-ratio: 1 / 1.1; object-fit: cover; border-radius: 10px; box-shadow: 0 14px 30px rgba(16, 42, 69, 0.14); }
+.member-id h3 { margin: 0 0 8px; font-family: var(--serif-jp); font-size: 22px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
+.member-role { margin: 0; font-size: 12.5px; letter-spacing: 0.12em; color: var(--azure); }
+.member-bio { margin: 0; font-size: 14.5px; line-height: 2.05; color: var(--muted); }
+.member-link { margin: 12px 0 0; font-size: 13px; }
+.member-link a { border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+.member-link a:hover { border-bottom-color: var(--azure); }
+
+/* ============================================================
+   12 Contact（dark）+ フォーム
+   ============================================================ */
+.section-contact { background-color: var(--navy-deep); background-image: linear-gradient(165deg, #08172a 0%, #11355a 100%); color: var(--on-dark); }
+.section-contact .sec-title { color: #fff; }
+.section-contact .sec-kicker { color: var(--on-dark-azure); }
+.section-contact .sec-kicker::before { background: var(--on-dark-azure); }
+.contact-grid { display: grid; grid-template-columns: minmax(240px, 4fr) 8fr; gap: clamp(40px, 5vw, 80px); align-items: start; }
+.contact-lead { margin: 0 0 8px; font-size: 15.5px; line-height: 2.2; color: var(--on-dark-soft); }
+.contact-form { max-width: 760px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.form-field { margin-bottom: 26px; }
+.form-field label { display: block; margin-bottom: 10px; font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--on-dark); }
+.required, .optional { margin-left: 10px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; }
+.required { color: var(--on-dark-azure); }
+.optional { color: var(--on-dark-soft); }
+.form-field input, .form-field select, .form-field textarea {
+    width: 100%; padding: 14px 16px; font-family: var(--sans); font-size: 15px; color: #fff;
+    background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.22); border-radius: 8px;
+    transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.4); }
+.form-field select { color: rgba(255,255,255,0.9); }
+.form-field select option { color: var(--ink); }
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--on-dark-azure); background: rgba(255, 255, 255, 0.09); }
+.form-field textarea { resize: vertical; }
+.form-submit { margin-top: 12px; }
+.form-message { margin: 26px 0 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.18); font-size: 14.5px; line-height: 2; color: var(--on-dark); }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer { background: #06101d; color: rgba(255, 255, 255, 0.72); padding: 84px 0 44px; }
+.footer-main { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; padding-bottom: 52px; border-bottom: 1px solid rgba(255, 255, 255, 0.12); }
+.footer-logo { margin: 0 0 18px; font-family: var(--serif-en); font-size: 22px; letter-spacing: 0.05em; color: #fff; }
+.footer-logo .brand-sep { color: var(--on-dark-azure); }
+.footer-logo .brand-sub { font-size: 0.62em; letter-spacing: 0.18em; text-transform: uppercase; }
+.footer-company { margin: 0; font-size: 12.5px; line-height: 2.1; color: rgba(255, 255, 255, 0.5); }
+.footer-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 12px 30px; }
+.footer-nav a { font-size: 13px; color: rgba(255, 255, 255, 0.66); transition: color 0.25s ease; }
+.footer-nav a:hover { color: #fff; }
+.footer-bottom { padding-top: 34px; }
+.copyright { margin: 0; font-family: var(--serif-en); font-size: 13px; letter-spacing: 0.06em; color: rgba(255, 255, 255, 0.55); }
+.curated { color: rgba(255, 255, 255, 0.5); margin-left: 4px; }
+
+/* ============================================================
+   Slide-in CTA
+   ============================================================ */
+.slidein-cta { position: fixed; right: 26px; bottom: 26px; z-index: 90; width: 330px; max-width: calc(100vw - 52px); padding: 26px 28px; background: var(--navy-deep); border-radius: 14px; border-top: 2px solid var(--azure); box-shadow: 0 24px 54px rgba(0, 0, 0, 0.34); opacity: 0; visibility: hidden; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s; }
+.slidein-cta.is-shown { opacity: 1; visibility: visible; transform: translateY(0); }
+.slidein-cta p { margin: 0 0 18px; font-size: 12.5px; line-height: 2; color: rgba(255, 255, 255, 0.84); }
+.btn-slidein { display: inline-block; font-family: var(--serif-en); font-size: 14px; letter-spacing: 0.12em; padding: 9px 24px; border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 999px; color: #fff; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+.btn-slidein:hover { background: #fff; color: var(--ink); border-color: #fff; }
+.slidein-close { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; background: none; border: 0; color: rgba(255, 255, 255, 0.5); cursor: pointer; font-size: 13px; transition: color 0.25s ease; }
+.slidein-close:hover { color: #fff; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1080px) {
+    .about-grid, .cover-grid, .relation-grid, .contact-grid { grid-template-columns: 1fr; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .feature-cols, .issue-cols { gap: 36px; }
+}
+@media (max-width: 900px) {
+    .nav-toggle { display: block; }
+    .global-nav { position: fixed; top: var(--header-h); left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--line); max-height: 0; overflow: hidden; visibility: hidden; transition: max-height 0.4s ease, visibility 0.4s; }
+    .site-header.nav-open .global-nav { max-height: calc(100vh - var(--header-h)); overflow-y: auto; visibility: visible; }
+    .site-header.nav-open { background: rgba(255, 255, 255, 0.98); border-bottom-color: var(--line); height: var(--header-h); }
+    .site-header.nav-open .brand-name { color: var(--ink); }
+    .site-header.nav-open .brand-sep { color: var(--azure); }
+    .global-nav ul { flex-direction: column; align-items: stretch; gap: 0; padding: 8px 0 16px; }
+    .global-nav a:not(.btn-contact) { display: block; padding: 15px 32px; color: var(--ink); }
+    .nav-cta { padding: 14px 32px 8px; }
+    .btn-contact { display: block; text-align: center; color: var(--ink); border-color: var(--line-2); }
+    .feature-cols, .service-grid, .case-grid, .issue-cols { grid-template-columns: 1fr; }
+    .gov-diagram { display: none; }
+    .gov-list { display: block; max-width: 560px; margin: 0 auto; }
+    .member-row { grid-template-columns: 110px 1fr; grid-template-areas: "photo id" "bio bio"; gap: 18px 24px; }
+    .member-photo { grid-area: photo; }
+    .member-id { grid-area: id; align-self: center; }
+    .member-text { grid-area: bio; }
+}
+@media (max-width: 600px) {
+    body { font-size: 15px; }
+    .container, .header-inner { padding: 0 20px; }
+    .stat-band { grid-template-columns: 1fr; gap: 22px; padding: 32px 26px; }
+    .stat + .stat { border-left: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 22px; }
+    .def-row, .cv-row, .region-row { grid-template-columns: 1fr; gap: 4px; }
+    .ivs-note { grid-template-columns: 1fr; gap: 20px; }
+    .ivs-cover { max-width: 130px; }
+    .compliance-note { grid-template-columns: 1fr; gap: 10px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .relation-diagram { display: none; }
+    .relation-list { display: block; }
+    .footer-main { flex-direction: column; gap: 32px; }
+    .sec-index { display: none; }
+    .hero-actions { gap: 18px; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+}

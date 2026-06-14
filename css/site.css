@@ -249,8 +249,8 @@ section { scroll-margin-top: var(--header-h); }
 .cv-row:last-child { border-bottom: 1px solid var(--line); }
 .cv-row dt { font-size: 14px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
 .cv-row dd { margin: 0; font-size: 14.5px; line-height: 1.95; color: var(--muted); }
-.ivs-note { display: grid; grid-template-columns: 110px 1fr; gap: 32px; align-items: start; padding: 34px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--azure); border-radius: 12px; }
-.ivs-cover { width: 100%; border-radius: 6px; box-shadow: 0 12px 28px rgba(16, 42, 69, 0.16); }
+.ivs-note { display: grid; grid-template-columns: 128px 1fr; gap: 32px; align-items: start; padding: 34px; background: var(--paper); border: 1px solid var(--line); border-left: 3px solid var(--azure); border-radius: 12px; }
+.ivs-cover { display: block; width: 100%; height: auto; aspect-ratio: 259 / 388; object-fit: contain; border-radius: 6px; box-shadow: 0 12px 28px rgba(16, 42, 69, 0.16); }
 .ivs-label { margin: 0 0 10px; font-family: var(--serif-jp); font-size: 17px; font-weight: 600; letter-spacing: 0.05em; color: var(--ink); }
 .ivs-note p:not(.ivs-label) { margin: 0 0 12px; font-size: 14px; line-height: 2; color: var(--muted); }
 .ivs-note p:last-child { margin-bottom: 0; }

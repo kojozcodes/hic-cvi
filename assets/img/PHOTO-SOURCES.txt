@@ -4,3 +4,12 @@ License: Pexels License — free for commercial use, no attribution required.
 https://www.pexels.com/license/
 
 photo-advisory.jpg   Pexels #7845363  (Japanese business advisory / consultation)
+
+
+Other assets
+------------
+ivs-standards.jpg    Official IVSC publication cover — "International Valuation Standards (IVS),
+                     Effective 31 January 2022". Rendered at high resolution from page 1 of the
+                     official IVS PDF (hosted by RICS, rics.org). Referential use of the publication
+                     cover — the firm's chairman translated/published these standards. Replaces the
+                     earlier low-resolution copy taken from the client's PPT v1.4 (259x388).

@@ -1339,3 +1339,82 @@ section { scroll-margin-top: var(--header-h); }
 .stat-number { font-size: clamp(54px, 9vw, 116px); line-height: 0.92; letter-spacing: -0.01em; }
 .stat-suffix { font-size: 22px; }
 .stat-band { margin: 56px 0 64px; }
+
+/* ============================================================
+   Polish ported from Option A (site.css) — CSS only, 2026-06.
+   Same finish vocabulary (dotted eyebrows / diagonal diamond
+   texture / highlighter keyword / circled-arrow buttons /
+   refined portraits + stats) rendered in B's own quieter
+   --accent and kept on B's editorial layout (RECTANGULAR
+   portraits, open stat dividers, sec-no/en/ja heads).
+   ============================================================ */
+:root { --grad: linear-gradient(135deg, var(--ink) 0%, var(--accent) 100%); }
+
+/* ---- dotted-line eyebrows (evelink) ---- */
+.hero-org::before {
+    content: ''; display: inline-block; width: 28px; height: 0;
+    border-top: 1.5px dotted rgba(255, 255, 255, 0.5);
+    vertical-align: middle; margin-right: 14px;
+}
+.sec-no::after { height: 0; background: none; border-top: 2px dotted var(--accent); }
+.section-dark .sec-no::after { border-top-color: var(--accent-on-dark); }
+
+/* ---- diagonal diamond geometric texture (smartconsul) — 極薄 ---- */
+.section-wash {
+    background-image:
+        repeating-linear-gradient(45deg, transparent 0 22px, rgba(22, 36, 58, 0.022) 22px 23px),
+        repeating-linear-gradient(135deg, transparent 0 22px, rgba(22, 36, 58, 0.022) 22px 23px);
+}
+.section-dark { position: relative; }
+.section-dark::before {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+        repeating-linear-gradient(45deg, transparent 0 26px, rgba(106, 166, 216, 0.05) 26px 27px),
+        repeating-linear-gradient(135deg, transparent 0 26px, rgba(106, 166, 216, 0.05) 26px 27px);
+}
+.section-dark > .container { position: relative; z-index: 1; }
+.hero-scrim {
+    background-image:
+        repeating-linear-gradient(45deg, transparent 0 26px, rgba(255, 255, 255, 0.02) 26px 27px),
+        repeating-linear-gradient(135deg, transparent 0 26px, rgba(255, 255, 255, 0.02) 26px 27px),
+        linear-gradient(96deg, rgba(12, 23, 38, 0.9) 0%, rgba(12, 23, 38, 0.62) 48%, rgba(12, 23, 38, 0.3) 100%),
+        linear-gradient(0deg, rgba(12, 23, 38, 0.55) 0%, rgba(12, 23, 38, 0) 38%);
+}
+
+/* ---- highlighter keyword (smartconsul) — B's on-dark accent ---- */
+.hero-title .hl {
+    background-image: linear-gradient(transparent 56%, rgba(62, 124, 192, 0.5) 56%, rgba(62, 124, 192, 0.5) 92%, transparent 92%);
+    padding: 0 0.08em;
+}
+
+/* ---- circled-arrow buttons (unposs) ---- */
+.btn .btn-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px; margin-left: 12px; border-radius: 50%;
+    font-size: 12px; border: 1px solid rgba(255, 255, 255, 0.42);
+}
+.btn:hover .btn-arrow { transform: translateX(3px); }
+.btn-hero:hover .btn-arrow { border-color: rgba(22, 36, 58, 0.4); }
+
+/* ---- member portraits: kept RECTANGULAR (B's signature) but polished ---- */
+.member-photo img {
+    border: 1px solid rgba(29, 78, 143, 0.18);
+    box-shadow: 0 12px 28px rgba(16, 42, 69, 0.15);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.member-row:hover .member-photo img {
+    transform: translateY(-3px);
+    box-shadow: 0 18px 38px rgba(16, 42, 69, 0.2);
+}
+
+/* ---- stat numbers: accent gradient text — kept open (no panel), B stays minimal ---- */
+.stat { border-left: 2px solid var(--accent); }
+.stat-number { white-space: nowrap; }  /* keep 400+名 together (big Round-15 numerals) */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .stat-number {
+        background-image: var(--grad);
+        -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .stat-suffix { -webkit-text-fill-color: var(--muted); }
+}

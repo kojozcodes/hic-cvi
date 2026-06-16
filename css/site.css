@@ -503,7 +503,7 @@ section { scroll-margin-top: var(--header-h); }
 /* ---- azure-ring circular member portraits（evelink） ---- */
 .member-photo { width: 124px; }
 .member-photo img {
-    aspect-ratio: 1 / 1; border-radius: 50%;
+    aspect-ratio: 1 / 1; height: auto; border-radius: 50%;
     border: 3px solid #fff;
     box-shadow: 0 0 0 2px var(--azure), 0 12px 26px rgba(16, 42, 69, 0.14);
 }

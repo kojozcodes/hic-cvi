@@ -1387,16 +1387,13 @@ section { scroll-margin-top: var(--header-h); }
     padding: 0 0.08em;
 }
 
-/* ---- circled-arrow buttons (unposs) — inline SVG for crisp, centered arrow ---- */
+/* ---- arrow (Tabler arrow-narrow-right) — no circle, slides on hover ---- */
 .btn .btn-arrow {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 26px; height: 26px; margin-left: 12px; border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    flex-shrink: 0;
+    display: inline-flex; align-items: center; vertical-align: middle;
+    margin-left: 10px; flex-shrink: 0;
 }
-.btn .btn-arrow svg { width: 14px; height: 14px; display: block; }
-.btn:hover .btn-arrow { transform: translateX(3px); }
-.btn-hero:hover .btn-arrow { border-color: rgba(22, 36, 58, 0.45); }
+.btn .btn-arrow svg { width: 20px; height: 20px; display: block; }
+.btn:hover .btn-arrow { transform: translateX(4px); }
 
 /* ---- member portraits: kept RECTANGULAR (B's signature) but polished ---- */
 .member-photo img {

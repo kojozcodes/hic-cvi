@@ -14,8 +14,9 @@ ivs-standards.jpg    Official IVSC publication cover — "International Valuatio
                      cover — the firm's chairman translated/published these standards. Replaces the
                      earlier low-resolution copy taken from the client's PPT v1.4 (259x388).
 
-shanghai-skyline.jpg Hero background — Shanghai Pudong / Lujiazui skyline (Oriental Pearl Tower,
-                     Shanghai Tower, SWFC, Jin Mao), daytime. Image supplied by the client
-                     (Neko, "1.jpg", 2048x1224); downscaled to 1800px for hero use. Replaces the
-                     earlier Beijing iStock image.
-                     NOTE: confirm the image's licence is cleared before public launch.
+beijing-skyline.jpg  Hero background — Guomao CBD, Beijing (blue hour). Image specified by the
+                     client (Neko): iStock asset id 2215552400 ("high-angle-view-of-guomao-cbd-
+                     central-business-district-in-beijing-china"). Sourced from the client-provided
+                     iStock preview (612x408, no watermark) and upscaled to 1400px for hero use.
+                     NOTE: iStock preview — a standard iStock licence should be purchased before
+                     public launch if this image is kept.
